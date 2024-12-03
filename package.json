@@ -2,7 +2,7 @@
   "name": "highlight-unused-typescript-functions",
   "displayName": "Highlight unused Typescript functions",
   "description": "Highlight exported Typescript functions that are not being referenced in other files.",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "author": "Spencer Robertson",
   "license": "MIT",
   "repository": "https://github.com/spencer-robertson/highlight-unused-ts-functions",
@@ -23,6 +23,28 @@
     "onLanguage:typescript",
     "onLanguage:typescriptreact"
   ],
+  "contributes": {
+    "configuration": {
+      "title": "Highlight unused Typescript functions",
+      "properties": {
+        "highlightUnused.highlightFunctionsThatDon'tNeedExport": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable/Disable highlighting of exported functions that are only referenced in the current file. This still highlights functions that are not referenced anywhere in the workspace."
+        },
+        "highlightUnused.highlightColor": {
+          "type": "string",
+          "default": "yellow",
+          "description": "Specifies the color of the underline highlight. No underline highlighting will be applied if this is null."
+        },
+        "highlightUnused.addRulerHighlight": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable/Disable highlighting in the ruler."
+        }
+      }
+    }
+  },
   "main": "./dist/extension.js",
   "scripts": {
     "vscode:prepublish": "npm run package",

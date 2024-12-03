@@ -8,6 +8,11 @@ export function activate(context: vscode.ExtensionContext) {
 	let timeout: NodeJS.Timer;
 
 	const editor = vscode.window.activeTextEditor;
+	const settings = vscode.workspace.getConfiguration('highlightUnused');
+
+	const highlightColor = settings.get('highlightColor');
+	const highlightSameFileExports = settings.get("highlightFunctionsThatDon'tNeedExport");
+	const addRulerHighlight = settings.get("addRulerHighlight");
 
 	if (!editor) {
 		console.info('No active editor!');
@@ -15,16 +20,16 @@ export function activate(context: vscode.ExtensionContext) {
 	}
 
 	const exportDecoration = vscode.window.createTextEditorDecorationType({
-		textDecoration: 'underline wavy yellow',
+		textDecoration: `underline wavy ${highlightColor}`,
 		opacity: '0.7',
-		overviewRulerColor: 'yellow',
+		...(addRulerHighlight === true && { overviewRulerColor: `${highlightColor}` }),
 	});
 
 	const triggerUpdateDecorations = (editor: vscode.TextEditor | undefined = vscode.window.activeTextEditor) => {
 		if (timeout) {
 			clearTimeout(timeout as any);
 		}
-		timeout = setTimeout(() => editor && underlineExportedCommand(editor.document, exportDecoration), 1000);
+		timeout = setTimeout(() => editor && underlineExportedCommand(editor.document, exportDecoration, highlightSameFileExports === true), 1000);
 	};
 
 	vscode.workspace.onDidChangeTextDocument(event => {
@@ -50,7 +55,7 @@ export function activate(context: vscode.ExtensionContext) {
 }
 
 // Command to underline all exported entities
-const underlineExportedCommand = async (document: vscode.TextDocument, exportDecoration: vscode.TextEditorDecorationType) => {
+const underlineExportedCommand = async (document: vscode.TextDocument, exportDecoration: vscode.TextEditorDecorationType, highlightSameFileExports: boolean) => {
 	const text = document.getText();
 	const ranges: vscode.Range[] = [];
 	const noExternalReferences: vscode.Range[] = [];
@@ -118,12 +123,22 @@ const underlineExportedCommand = async (document: vscode.TextDocument, exportDec
 			range.start
 		);
 
+		const internalReferences = locations.filter(
+			(location) => location.uri.fsPath !== document.uri.fsPath
+		);
+
 		const externalReferences = locations.filter(
 			(location) => location.uri.fsPath !== document.uri.fsPath
 		);
 
 		if (externalReferences.length === 0) {
-			noExternalReferences.push(range);
+			if (highlightSameFileExports) {
+				if (internalReferences.length === 0) {
+					noExternalReferences.push(range);
+				}
+			} else {
+				noExternalReferences.push(range);
+			}
 		}
 	}
 
