@@ -6,10 +6,10 @@
 
 <p align="center">
   <a href="https://marketplace.visualstudio.com/items?itemName=spencerrobertson.highlight-unused-typescript-functions" title="Check it out on the Visual Studio Marketplace">
-    <img src="https://vscode-marketplace-badge.vercel.app/api/badge/version/spencerrobertson.highlight-unused-typescript-functions?style=flat-square" alt="Visual Studio Marketplace" style="display: inline-block" />
+    <img src="https://vsmarketplacebadges.dev/version-short/spencerrobertson.highlight-unused-typescript-functions.svg" alt="Visual Studio Marketplace" style="display: inline-block" />
   </a>
 
-  <img src="https://vscode-marketplace-badge.vercel.app/api/badge/installs/spencerrobertson.highlight-unused-typescript-functions?style=flat-square" alt="Number of installs"  style="display: inline-block;margin-left:10px" />
+  <img src="https://vsmarketplacebadges.dev/installs/spencerrobertson.highlight-unused-typescript-functions.svg" alt="Number of installs"  style="display: inline-block;margin-left:10px" />
 </p>
 
 ## Features
