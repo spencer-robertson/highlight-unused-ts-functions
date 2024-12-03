@@ -10,6 +10,8 @@
   </a>
 
   <img src="https://vsmarketplacebadges.dev/installs/spencerrobertson.highlight-unused-typescript-functions.svg" alt="Number of installs"  style="display: inline-block;margin-left:10px" />
+
+   <img src="https://vsmarketplacebadges.dev/rating/spencerrobertson.highlight-unused-typescript-functions.svg" alt="Rating" style="display: inline-block;margin-left:10px" />
 </p>
 
 ## Features
