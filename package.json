@@ -1,11 +1,16 @@
 {
-  "name": "highlight-unused-exported-functions",
-  "displayName": "Highlight unused exported TS functions",
-  "description": "Vscode extension to highlight unused exported typescript functions",
+  "name": "highlight-unused-typescript-functions",
+  "displayName": "Highlight unused Typescript functions",
+  "description": "Highlight exported Typescript functions that are not being referenced in other files.",
   "version": "0.0.1",
   "author": "Spencer Robertson",
   "license": "MIT",
   "repository": "https://github.com/spencer-robertson/highlight-unused-exported-functions",
+  "icon": "assets/icon.png",
+  "galleryBanner": {
+    "color": "#86836D",
+    "theme": "dark"
+  },
   "engines": {
     "vscode": "^1.95.0"
   },

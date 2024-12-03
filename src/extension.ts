@@ -10,7 +10,7 @@ export function activate(context: vscode.ExtensionContext) {
 	const editor = vscode.window.activeTextEditor;
 
 	if (!editor) {
-		vscode.window.showInformationMessage('No active editor!');
+		console.info('No active editor!');
 		return;
 	}
 
@@ -20,7 +20,12 @@ export function activate(context: vscode.ExtensionContext) {
 		overviewRulerColor: 'yellow',
 	});
 
-	triggerUpdateDecorations(editor);
+	const triggerUpdateDecorations = (editor: vscode.TextEditor | undefined = vscode.window.activeTextEditor) => {
+		if (timeout) {
+			clearTimeout(timeout as any);
+		}
+		timeout = setTimeout(() => editor && underlineExportedCommand(editor.document, exportDecoration), 1000);
+	};
 
 	vscode.workspace.onDidChangeTextDocument(event => {
 		if ((event.document.languageId === 'typescript' || event.document.languageId === 'typescriptreact') && vscode.window.activeTextEditor && event.document === vscode.window.activeTextEditor.document) {
@@ -41,12 +46,7 @@ export function activate(context: vscode.ExtensionContext) {
 		}
 	});
 
-	function triggerUpdateDecorations(editor: vscode.TextEditor | undefined = vscode.window.activeTextEditor) {
-		if (timeout) {
-			clearTimeout(timeout as any);
-		}
-		timeout = setTimeout(() => editor && underlineExportedCommand(editor.document, exportDecoration), 1000);
-	}
+	triggerUpdateDecorations(editor);
 }
 
 // Command to underline all exported entities
