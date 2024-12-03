@@ -2,7 +2,7 @@
   "name": "highlight-unused-typescript-functions",
   "displayName": "Highlight unused Typescript functions",
   "description": "Highlight exported Typescript functions that are not being referenced in other files.",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "Spencer Robertson",
   "license": "MIT",
   "repository": "https://github.com/spencer-robertson/highlight-unused-exported-functions",
